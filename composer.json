@@ -1,0 +1,21 @@
+{
+    "name": "eliardo/split_play",
+    "description": "teste",
+    "autoload": {
+        "psr-4": {
+            "SplitPlay\\": "src/"
+        },
+        "files": [
+            "configDB.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "eliard0",
+            "email": "eliardosilva81@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "3.*"
+    }
+}
