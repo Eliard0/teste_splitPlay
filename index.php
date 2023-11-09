@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Test\Controllers\ProdutoController;
+use App\Controllers\ProdutoController;
 
 require 'vendor/autoload.php';
 

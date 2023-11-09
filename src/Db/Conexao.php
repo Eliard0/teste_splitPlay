@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Db;
+namespace App\Db;
 
 abstract class Conexao
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Test\Db;
+namespace App\Db;
 
-use Test\Models\ProdutoModel;
+use App\Models\ProdutoModel;
 
 class Produto extends Conexao{
 

@@ -1,6 +1,5 @@
 <?php
-namespace Test\Models;
-
+namespace App\Models;
 
 final class ProdutoModel{
 
