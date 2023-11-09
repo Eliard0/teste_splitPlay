@@ -11,14 +11,7 @@ class Produto extends Conexao{
         parent::__construct();
     }
 
-    //Por motivos do alem quando chega no controle não funciona  
-    // public function getProdutos():array{
-    //     $produto = $this->pdo->query("SELECT id, nome, descricao, preco, quantidade FROM produto;")->fetchAll(\PDO::FETCH_ASSOC);
-        
-    //     return $produto;
-    // }
-
-    public function inserirProduto(ProdutoModel $produto): void{
+    public function postProduto(ProdutoModel $produto): void{
      
       $query = $this->pdo
       ->prepare('INSERT INTO produto VALUES(
@@ -34,6 +27,36 @@ class Produto extends Conexao{
             'preco' => $produto->getpreco(),
             'descricao' => $produto->getDescricao(),
             'quantidade' => $produto->getQuantidade(),
+        ]);
+    }
+
+    public function updateProduto(ProdutoModel $produto): void
+    {
+        $statement = $this->pdo
+            ->prepare(
+            'UPDATE produto SET
+                nome = :nome,
+                descricao = :descricao,
+                preco = :preco,
+                quantidade = :quantidade
+                WHERE 
+                id = :id
+            ;');
+        $statement->execute([
+            'nome' => $produto->getNome(),
+            'preco' => $produto->getpreco(),
+            'descricao' => $produto->getDescricao(),
+            'quantidade' => $produto->getQuantidade(),
+            'id' => $produto->getId()
+        ]);
+    }
+
+    public function dellProduto(int $id): void
+    {
+        $statement = $this->pdo
+            ->prepare('DELETE FROM produto WHERE id = :id;');
+        $statement->execute([
+            'id' => $id
         ]);
     }
 }

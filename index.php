@@ -15,10 +15,10 @@ $app = new \Slim\App($configuration);
 
 $app->get('/', ProdutoController::class.':getProdutos');
 $app->post('/adicionar/produto/', ProdutoController::class.':addProduto');
-$app->put('/atualizar/produto', ProdutoController::class.':putProduto');
-$app->delete('/deletar/produto', ProdutoController::class.':deleteProduto');
+$app->put('/atualizar/produto/', ProdutoController::class.':putProduto');
+$app->delete('/deletar/produto/', ProdutoController::class.':dellProduto');
 
-$app->get('/produtos/{:id}', ProdutoController::class.':getProdutoId');
+$app->get('/produto/{id}', ProdutoController::class.':getProdutoId');
 
 
 $app->run();
