@@ -7,7 +7,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use App\Controllers\ProdutoController;
 use PHPUnit\Framework\TestCase;
 
-class ProdutoIdControllerTest extends TestCase{
+class TodosProdutoControllerTest extends TestCase{
     
     private function createRequest($method, $route)
     {
@@ -21,23 +21,25 @@ class ProdutoIdControllerTest extends TestCase{
         return $request;
     }
     
-    public function testgetProdutoId(){
-
+    public function testGetProdutos(){
         $obj = new ProdutoController();
-        $id = "2";
 
-        $request = $this->createRequest('GET', 'http://localhost/slim/index.php/produto/$id');
+        $request = $this->createRequest('GET', '/');
+ 
         $response = new \Slim\Http\Response();
-
-        $response = $obj->getProdutoId($request, $response, ["id" => $id]);
-
-        $produto = json_decode((string)$response->getBody(), true);
-
-        $this->assertEquals($id, $produto["id"]);
-
-        $this->assertArrayHasKey("nome", $produto);
-        $this->assertArrayHasKey("preco", $produto);
-        $this->assertArrayHasKey("descricao", $produto);
+ 
+        $response = $obj->getProdutos($request, $response, array());
+ 
+        $body = $response->getBody();
+ 
+        $status = $response->getStatusCode();
+ 
+        $data = json_decode($body, true);
+ 
+        $this->assertEquals(200, $status);
+ 
+        $this->assertNotEmpty($data);
+        $this->assertIsArray($data);
     }
 
 }

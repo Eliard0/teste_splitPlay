@@ -38,7 +38,7 @@ class ProdutoController extends Conexao{
         $query->execute(['id' => $id]);
         $dado = $query->fetch(\PDO::FETCH_ASSOC);
         if (empty($dado)) {
-            return $response->withJson(['message'=>'Informe o id do usuário!'])->withStatus(404);
+            return $response->withJson(['menssagem'=>'Informe o id do usuário!'])->withStatus(404);
         } else {
             return $response->withJson($dado);
         }
@@ -49,7 +49,7 @@ class ProdutoController extends Conexao{
         $dado = $request->getParsedBody();
         
         if(empty($dado['nome'] && $dado['preco'] && $dado['descricao'] && $dado['quantidade'])){
-            $response = $response->withJson(['message'=>' Preencha todos os dados'])->withStatus(411);
+            $response = $response->withJson(['menssagem'=>' Preencha todos os dados'])->withStatus(411);
             return $response;
         }else{
             $produto = new Produto();
@@ -60,7 +60,7 @@ class ProdutoController extends Conexao{
                         ->setDescricao($dado['descricao'])
                         ->setQuantidade($dado['quantidade']);
             $produto->postProduto($baseProduto);
-            $response = $response->withJson(['message'=>' Cadastrado com sucesso'])->withStatus(200);
+            $response = $response->withJson(['menssagem'=>' Cadastrado com sucesso'])->withStatus(200);
             return $response;
         }
 
@@ -70,7 +70,7 @@ class ProdutoController extends Conexao{
         $dado = $request->getParsedBody();
 
         if(empty($dado['nome'] && $dado['preco'] && $dado['descricao'] && $dado['quantidade'])){
-            $response = $response->withJson(['message'=>' Preencha todos os dados'])->withStatus(411);
+            $response = $response->withJson(['menssagem'=>' Preencha todos os dados'])->withStatus(411);
             return $response;
         }else{
             $produto = new Produto();
@@ -93,7 +93,7 @@ class ProdutoController extends Conexao{
         $dado = $request->getParsedBody();
 
         if(empty($dado['id'])){
-            $response = $response->withJson(['message' => 'Informe o id do usuário!'])->withStatus(411);
+            $response = $response->withJson(['menssagem' => 'Informe o id do usuário!'])->withStatus(411);
             return $response;
         }else{
         
@@ -102,9 +102,9 @@ class ProdutoController extends Conexao{
 
             $baseProduto->setId($dado['id']);
 
-            $produto->dellProduto(intval($baseProduto));
+            $produto->dellProduto((int)$baseProduto);
             
-            $response = $response->withJson(['message'=>' Deletado com sucesso'])->withStatus(200);
+            $response = $response->withJson(['menssagem'=>' Deletado com sucesso'])->withStatus(200);
             
             return $response;
         }

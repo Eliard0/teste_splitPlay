@@ -7,7 +7,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use App\Controllers\ProdutoController;
 use PHPUnit\Framework\TestCase;
 
-class PegarTodosProdutoControllerTest extends TestCase{
+class DeletarProdutoControllerTest extends TestCase{
     
     private function createRequest($method, $route)
     {
@@ -21,25 +21,21 @@ class PegarTodosProdutoControllerTest extends TestCase{
         return $request;
     }
     
-    public function testGetProdutos(){
-        $obj = new ProdutoController();
+    public function testdellProduto(){
 
-        $request = $this->createRequest('GET', '/');
- 
+        $obj = new ProdutoController();
+        $id = 10;
+
+        $request = $this->createRequest('DELETE', 'http://localhost/slim/index.php/deletar/produto/');
         $response = new \Slim\Http\Response();
- 
-        $response = $obj->getProdutos($request, $response, array());
- 
-        $body = $response->getBody();
- 
-        $status = $response->getStatusCode();
- 
-        $data = json_decode($body, true);
- 
-        $this->assertEquals(200, $status);
- 
-        $this->assertNotEmpty($data);
-        $this->assertIsArray($data);
+
+        $response = $obj->dellProduto($request, $response, $id);
+
+        $produto = json_decode($response, true);
+
+        $this->assertEquals($id, $produto["id"]);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('{"menssagem":"Deletado com sucesso"}', $produto);
     }
 
 }
